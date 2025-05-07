@@ -11,6 +11,16 @@
 
 function verificarPalavra(frase, palavraBusca) {
   // TODO: implementar função
+  let (frase).trim
+  if ((frase).length < 5){
+    return "A frase é muito curta"
+  }
+  if ((palavraBusca).includes(frase)){
+    return "A frase cotém a palavra busca"
+  }
+  if ((frase).contains(palavraBusca)){
+    return "A frase não contém a palavra de busca"
+  }
 }
 
 //NÃO REMOVA O CÓDIGO ABAIXO
