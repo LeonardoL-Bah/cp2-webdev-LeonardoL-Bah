@@ -1,0 +1,16 @@
+{
+    "name": "cp2-js",
+    "version": "1.0.0",
+    "description": "CP2 JavaScript - GitHub Classroom",
+    "main": "index.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "devDependencies": {
+      "jest": "^29.0.0"
+    },
+    "jest": {
+      "testEnvironment": "node"
+    }
+  }
+  

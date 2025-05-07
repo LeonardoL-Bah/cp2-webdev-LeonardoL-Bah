@@ -1,0 +1,100 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Adivinhar Numero
+      id: adivinhar-numero
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Adivinhar Numero
+        setup-command: npm
+        command: npx jest adivinharNumero.test.js
+        timeout: 10
+        max-score: 1
+    - name: Calcular
+      id: calcular
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Calcular
+        setup-command: ''
+        command: npx jest calcular.test.js
+        timeout: 10
+        max-score: 2
+    - name: Calcular IMC
+      id: calcular-imc
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Calcular IMC
+        setup-command: ''
+        command: npx jest calcularIMC.test.js
+        timeout: 10
+        max-score: 1
+    - name: Classificar Nota
+      id: classificar-nota
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Classificar Nota
+        setup-command: ''
+        command: npx jest classificarNota.test.js
+        timeout: 10
+        max-score: 1
+    - name: Corrigir Valor
+      id: corrigir-valor
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Corrigir Valor
+        setup-command: ''
+        command: npx jest corrigirValor.test.js
+        timeout: 10
+        max-score: 1
+    - name: Saudação
+      id: saudacao
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Saudação
+        setup-command: ''
+        command: npx jest saudacao.test.js
+        timeout: 10
+        max-score: 2
+    - name: Somar
+      id: somar
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Somar
+        setup-command: ''
+        command: npx jest somar.test.js
+        timeout: 10
+        max-score: 1
+    - name: Verificar Palavra
+      id: verificar-palavra
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Verificar Palavra
+        setup-command: ''
+        command: npx jest verificarPalavra.test.js
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        ADIVINHAR-NUMERO_RESULTS: "${{steps.adivinhar-numero.outputs.result}}"
+        CALCULAR_RESULTS: "${{steps.calcular.outputs.result}}"
+        CALCULAR-IMC_RESULTS: "${{steps.calcular-imc.outputs.result}}"
+        CLASSIFICAR-NOTA_RESULTS: "${{steps.classificar-nota.outputs.result}}"
+        CORRIGIR-VALOR_RESULTS: "${{steps.corrigir-valor.outputs.result}}"
+        SAUDACAO_RESULTS: "${{steps.saudacao.outputs.result}}"
+        SOMAR_RESULTS: "${{steps.somar.outputs.result}}"
+        VERIFICAR-PALAVRA_RESULTS: "${{steps.verificar-palavra.outputs.result}}"
+      with:
+        runners: adivinhar-numero,calcular,calcular-imc,classificar-nota,corrigir-valor,saudacao,somar,verificar-palavra
